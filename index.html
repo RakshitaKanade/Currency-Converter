@@ -1,0 +1,41 @@
+<html>
+<head>
+       <title> Currecnt Converter  </title>
+       <style>
+              * { font-size:40px; }
+              body { background-color:lightyellow;}
+       </style>
+</head>
+
+<body>
+<center>
+        <h1> Currecnt Converter  </h1>
+        <form onsubmit="show()">
+                 <input type="number" step="any" id="dollars" placeholder="enter amt in dollars " />
+                 <br><br>
+                 <input type="submit" />
+       </form>
+              <h2 id="msg" />
+       <script>
+                function show()
+                {
+                         event.preventDefault();
+                         let dollars = document.getElementById("dollars");
+			 let msg = document.getElementById("msg");
+
+                        let url = "https://api.exchangerate-api.com/v4/latest/USD";
+                        fetch(url)
+			.then(res => res.json())
+ 			.then(data => {
+                                let DOLLAR = data.rates.INR;
+                                let rupees = dollars.value * DOLLAR;
+				msg.innerHTML = "\u20B9" + rupees.toFixed(2);
+                })
+		.catch(ree => msg.innerHTML = "issue " + err);
+	}
+        </script>
+</center>
+</body>
+</html>
+
+         
